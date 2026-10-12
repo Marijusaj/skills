@@ -1,0 +1,38 @@
+{
+  "skill_name": "design-check",
+  "evals": [
+    {
+      "id": 0,
+      "name": "derived-state-new-schema",
+      "prompt": "Loyalty scheme: earn 1 point per euro on order completion, redeem at checkout, show balance on account page. Write the migration and the TypeScript.",
+      "assertions": [
+        "Balance is DERIVED from a ledger of point events, not stored as a mutable points_balance column that code increments",
+        "Earning and redeeming are each recorded as immutable ledger rows (facts), including redemption as a negative/spend row",
+        "Double-awarding is made impossible structurally (unique constraint on order_id, or equivalent), not merely avoided by careful calling",
+        "The reply ends with the four-line 'Design check' block (fact-or-conclusion / computed-elsewhere / strongest-layer / change-amplification)"
+      ]
+    },
+    {
+      "id": 1,
+      "name": "fix-in-fresh-code",
+      "prompt": "Bell icon shows unread count 3 when the user has 5 unread. Given schema + notify.ts + mark-read.ts + header.tsx, and note that digest.ts and the mobile badge route also read users.unread_count. Find the cause and fix it.",
+      "assertions": [
+        "Diagnoses the ROOT cause as users.unread_count being a stored conclusion duplicating notifications.read_at — not merely a bug in the increment/decrement calls",
+        "The fix DERIVES the count (e.g. count(*) where read_at is null, via a view or query) instead of adding a repair job, backfill, or more careful counter updates",
+        "Names every other reader of the stale value (header, digest.ts, mobile badge route) and says what happens to each",
+        "Makes the old path impossible — drops the unread_count column or otherwise prevents it being written/read again",
+        "The reply ends with the four-line 'Design check' block"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "trivial-change-skip",
+      "prompt": "Add a --verbose flag to scripts/import-csv.ts that prints the row number as each row is processed. Off by default.",
+      "assertions": [
+        "Delivers a correct, working --verbose flag that is off by default",
+        "Does NOT emit the four-line 'Design check' block — this change is on the skill's explicit skip list",
+        "Does not introduce an argument-parsing abstraction, logger module, or other structure disproportionate to a one-flag change"
+      ]
+    }
+  ]
+}

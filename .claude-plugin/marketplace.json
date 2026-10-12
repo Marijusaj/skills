@@ -1,0 +1,15 @@
+{
+  "name": "marijusaj",
+  "owner": {
+    "name": "Marijus Jankauskas",
+    "url": "https://github.com/Marijusaj"
+  },
+  "plugins": [
+    {
+      "name": "marijusaj-skills",
+      "source": ".",
+      "description": "design-check, ship, clean and clean-all."
+    }
+  ],
+  "description": "Skills for shipping with parallel agents: design-check, ship, clean, clean-all."
+}
