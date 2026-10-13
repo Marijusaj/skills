@@ -21,12 +21,12 @@ git clone https://github.com/Marijusaj/skills ~/Code/skills
 for s in ~/Code/skills/skills/*/; do ln -sfn "$s" ~/.claude/skills/$(basename "$s"); done
 ```
 
-Or install as a plugin, which namespaces the skills (`marijusaj-skills:ship`)
+Or install as a plugin, which namespaces the skills (`/mj:ship`, `/mj:clean`)
 so they cannot clash with a `ship` you already have:
 
 ```bash
 claude plugin marketplace add Marijusaj/skills
-claude plugin install marijusaj-skills@marijusaj
+claude plugin install mj@mj
 ```
 
 ## Per-repo configuration

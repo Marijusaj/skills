@@ -1,12 +1,12 @@
 {
-  "name": "marijusaj",
+  "name": "mj",
   "owner": {
     "name": "Marijus Jankauskas",
     "url": "https://github.com/Marijusaj"
   },
   "plugins": [
     {
-      "name": "marijusaj-skills",
+      "name": "mj",
       "source": ".",
       "description": "design-check, ship, clean and clean-all."
     }
