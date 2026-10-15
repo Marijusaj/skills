@@ -1,5 +1,5 @@
 {
-  "name": "marijusaj-skills",
+  "name": "mj",
   "version": "0.1.0",
   "description": "Three skills for shipping with parallel agents: check a design before writing code, take a branch all the way to merge under a lock, and clean up what a session left behind.",
   "author": {
@@ -8,7 +8,15 @@
   },
   "repository": "https://github.com/Marijusaj/skills",
   "license": "MIT",
-  "keywords": ["skills", "claude-code", "design", "ship", "git", "worktrees", "cleanup"],
+  "keywords": [
+    "skills",
+    "claude-code",
+    "design",
+    "ship",
+    "git",
+    "worktrees",
+    "cleanup"
+  ],
   "skills": [
     "./skills/design-check",
     "./skills/ship",
