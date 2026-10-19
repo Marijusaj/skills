@@ -13,8 +13,14 @@ landing on one default branch. Each one is the route; the reasoning sits in a
 
 ## Install
 
-Symlink the skills into Claude Code's skill directory. A `git pull` then keeps
-them current.
+One command, any agent (Claude Code, Codex, Cursor, OpenCode and others):
+
+```bash
+npx skills@latest add Marijusaj/skills
+```
+
+Or symlink the skills into Claude Code's skill directory. A `git pull` then
+keeps them current.
 
 ```bash
 git clone https://github.com/Marijusaj/skills ~/Code/skills
