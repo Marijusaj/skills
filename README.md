@@ -10,7 +10,8 @@ landing on one default branch. Each one is the route; the reasoning sits in a
 | [interrogate-list](skills/interrogate-list/SKILL.md) | you, `/interrogate-list` | The same, each round asked as one numbered list of about ten questions, the next layer included, that you answer in a line (`1 yes, 2 no: ...`). |
 | [interrogate-cards](skills/interrogate-cards/SKILL.md) | you, `/interrogate-cards` | The same, each round asked as up to four clickable question cards. |
 | [design-check](skills/design-check/SKILL.md) | the model | Checks a design before code is written: deep vs shallow modules, the red flags, facts vs stored conclusions, and a four-line output block the owner reads instead of the code. |
-| [ship](skills/ship/SKILL.md) | you, `/ship` | Takes the current branch all the way out: commit, squash, rebase, gates, walk the UI if it changed, then push and merge under a remote lock so two agents cannot land unverified trees. |
+| [risk-review](skills/risk-review/SKILL.md) | the model, and `/ship` | Scores a branch 0-10 with a script (size, risky paths, your `riskPaths`) and the agent's own `Risk: N/10`, then runs the built-in `/code-review` at low, medium or high effort for 1 to 3 rounds, plus `/security-review` when security paths are touched. Fixes what blocks; asks you once only for a high-risk merge. |
+| [ship](skills/ship/SKILL.md) | you, `/ship` | Takes the current branch all the way out: commit, squash, rebase, gates, a review sized by risk, walk the UI if it changed, then push and merge under a remote lock so two agents cannot land unverified trees. |
 | [clean](skills/clean/SKILL.md) | you, `/clean` | Retires what this session and its child sessions left behind: dev servers, browsers, merged worktrees and branches. Never touches other sessions. |
 | [clean-all](skills/clean-all/SKILL.md) | you, `/clean-all` | The same sweep across the whole machine and every repo under `$CLEAN_REPOS` (default `~/Code`). |
 
