@@ -1,6 +1,6 @@
 ---
 name: interrogate
-description: Interrogate the owner until you know what to build, in rounds of questions that each carry your recommended answer, then capture the answers, check the design with a cold reader, plan and build. Use when the owner says "interrogate me", "grill me", "ask me questions until you know what to build" or "give me your recommended answer"; when a non-trivial feature or fix starts from a goal not yet pinned to decisions; and before spawning implementation subagents.
+description: Interrogate the owner until you know what to build, in rounds of questions that each carry your recommended answer, then capture the answers, check the design with a cold reader, plan and build. Use when the owner says "interrogate me", "grill me", "ask me questions until you know what to build" or "give me your recommended answer"; when a non-trivial feature or fix starts from a goal not yet pinned to decisions; and before spawning implementation subagents. Also for a plan that is not code (a decision, a purchase, a trip, a talk): it runs in no-repo mode.
 ---
 
 # Interrogate
@@ -20,6 +20,10 @@ research ─▶ premise ─▶ round ─▶ capture ─▶ frontier empty? ─�
 
 **Round format** comes from the args: `cards` or `list`. With neither, use
 `list`. Formats are in step 2.
+
+**No-repo mode**: when the goal is not a change to a codebase, or the owner
+says `no repo`. Say "no-repo mode" in your first message and read
+`no-repo.md` before round 1: every step runs, with its repo parts replaced.
 
 ## 1. Research, then check the premise
 
