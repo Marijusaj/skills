@@ -18,6 +18,10 @@ who only has what was written down.
 > without changing the result. Return the questions, most consequential first.
 > Return "nothing to ask" if that is the truth.
 
+**No-repo mode:** paste the Decided block into the prompt in place of the
+paths, and replace "build this" with "carry this plan out". Same questions,
+same three piles.
+
 ## Why a cold reader
 
 A grilling session finds what the owner and you thought of. It cannot find
