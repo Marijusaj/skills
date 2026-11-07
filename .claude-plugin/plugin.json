@@ -1,7 +1,7 @@
 {
   "name": "mj",
   "version": "0.1.0",
-  "description": "Skills for shipping with parallel agents: interrogate the owner until the design is pinned, check a design before writing code, take a branch all the way to merge under a lock, and clean up what a session left behind.",
+  "description": "Skills for shipping with parallel agents: interrogate the owner until the design is pinned, check a design before writing code, review each branch with effort sized to its risk, take a branch all the way to merge under a lock, and clean up what a session left behind.",
   "author": {
     "name": "Marijus Jankauskas",
     "url": "https://github.com/Marijusaj"
@@ -13,6 +13,7 @@
     "claude-code",
     "design",
     "planning",
+    "code-review",
     "ship",
     "git",
     "worktrees",
@@ -20,6 +21,7 @@
   ],
   "skills": [
     "./skills/design-check",
+    "./skills/risk-review",
     "./skills/ship",
     "./skills/clean",
     "./skills/clean-all",

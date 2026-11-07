@@ -8,8 +8,8 @@
     {
       "name": "mj",
       "source": ".",
-      "description": "interrogate, design-check, ship, clean and clean-all."
+      "description": "interrogate, design-check, risk-review, ship, clean and clean-all."
     }
   ],
-  "description": "Skills for shipping with parallel agents: interrogate, design-check, ship, clean, clean-all."
+  "description": "Skills for shipping with parallel agents: interrogate, design-check, risk-review, ship, clean, clean-all."
 }

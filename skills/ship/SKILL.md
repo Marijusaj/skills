@@ -1,7 +1,7 @@
 ---
 name: ship
 description: Take the current branch all the way out. Commit, squash, rebase, run the repo's gates, walk it if it is user-visible, then push and merge under a remote lock so parallel agents cannot collide. Any git repo; reads .claude/ship.json when present.
-argument-hint: "[optional PR title]"
+argument-hint: "[--lane l|m|h --reason \"why\"] [optional PR title]"
 disable-model-invocation: true
 ---
 
@@ -9,9 +9,11 @@ disable-model-invocation: true
 
 Invoking `/ship` **is** the permission. Stop only for a red gate, a conflict
 that needs a judgement about intent, a secret or data-dropping migration in the
-diff, or a lock you would have to break.
+diff, a lock you would have to break, or one of risk-review's two questions
+(a high-risk merge, blocking findings left after the last round).
 
-`$ARGUMENTS` is the PR title if given; otherwise derive it from the diff.
+`$ARGUMENTS`: `--lane l|m|h` and `--reason "<why>"` go to risk-review; the
+rest is the PR title if given, otherwise derive it from the diff.
 
 ## 0. Resolve the repo
 
@@ -51,8 +53,10 @@ bare `--force`.
 commit messages for an escape trailer (`Docs: n/a - <reason>` and the like)
 loses it here. Copy each trailer the branch relied on into the new message, in
 the exact form the gate's pattern matches; grep the gate script for that
-pattern rather than paraphrasing it. **Done when** `git log -1 --format=%B`
-shows every trailer the old commits carried.
+pattern rather than paraphrasing it. The highest `Risk: N/10` on the branch
+is one of them: it is the implementing agent's estimate, and risk-review may
+only raise it. **Done when** `git log -1 --format=%B` shows every trailer the
+old commits carried.
 
 ## 2. Rebase onto fresh upstream, read the lane
 
@@ -66,9 +70,9 @@ cannot resolve cleanly: read `reference.md` § *Cherry-pick*.
 
 | Diff touches | Lane | Route |
 |---|---|---|
-| only `quietPaths` | **quiet** | gates → merge |
-| code, nothing in `uiPaths` | **code** | gates → PR → merge |
-| anything in `uiPaths` | **full** | gates → walk → PR → merge |
+| only `quietPaths` | **quiet** | gates → risk score → merge |
+| code, nothing in `uiPaths` | **code** | gates → review → PR → merge |
+| anything in `uiPaths` | **full** | gates → review → walk → PR → merge |
 
 ### 2a. Prune the docs, in this commit
 
@@ -86,6 +90,14 @@ doc, or the repo has none and the report says so.
 
 Run the gate as one chained command. Red stops the ship: fix, re-run. Never
 `--no-verify` or weaken a check. **Never gate while holding the lock.**
+
+## 3b. Review, sized by risk
+
+Call the Skill tool with "risk-review" (under the plugin, "mj:risk-review"),
+passing the base `origin/${DEF}`, the gate command, and any `--lane`/`--reason`
+from the args. On the **quiet** lane, review only when it scores 4 or more, or
+a `--lane` was given. Keep its log line for the PR body and the report.
+**Done when** risk-review returns its log line.
 
 ## 4. Walk (full lane only)
 
@@ -122,6 +134,12 @@ for attempt in 1 2 3:
     release(); break
 ```
 
+**Lane H asks once, before the first `acquire`:** open the PR (ready, not
+merged), then ask the owner one question: what changed, what review found and
+fixed, the PR link, "merge?". Yes: run the loop. No: leave the PR open and
+report. L and M never ask. A later attempt whose
+rebase needed hand-resolved conflicts goes back to step 3b before merging.
+
 **Release on every exit path**, including failure. A held lock under ~15
 minutes old: wait. Older than ~30: follow the reference, and **report whose
 lock you broke**. **Done when** `gh pr view --json state` says MERGED and
@@ -142,7 +160,8 @@ link only for what only they can judge (how it looks, how the copy reads).
   `git push origin --delete <branch>` if GitHub did not.
 - Stop every process and close every browser tab the walk started.
 - `git ls-remote origin | grep ship-lock` prints nothing.
-- **Report**, one block: what shipped · gates · walk (done, or skipped and why)
+- **Report**, one block: what shipped · gates · review (risk-review's log
+  line, also in the PR body) · walk (done, or skipped and why)
   · docs pruned (file, items deleted, items left and why) · PR and merge state
   · deploy · lock contention · workspace.
 

@@ -297,6 +297,7 @@ never a follow-up PR: a follow-up for docs is how the prune gets skipped.
   "walkEvidence": "docs/walks/<date>-<topic>/",
   "uiPaths": ["src/app/", "src/components/"],
   "quietPaths": ["docs/", ".claude/", "scripts/"],
+  "riskPaths": ["src/billing/", "src/core/*.ts"],
   "lock": true
 }
 ```
