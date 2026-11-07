@@ -39,12 +39,14 @@ the hundred calls you will make without asking.
 ## 2. Ask the frontier, each question with your recommendation
 
 Map the decisions as a tree. The **frontier** is every decision whose
-prerequisites are settled. A question that depends on another still open this
-round waits for a later round.
+prerequisites are settled. In `cards`, a question that depends on another
+still open this round waits for a later round. In `list`, it rides along,
+conditioned on the answer it needs; drop it next round if that answer went
+the other way.
 
 | `list` | `cards` |
 |---|---|
-| The whole frontier as one numbered message: `**Q1 · <title>**` then the question, then `➡️ <recommendation and the trade-off>`. Word each so "yes" accepts the recommendation. The owner replies `1 yes, 2 no: <their way>, 3 ...`. | `AskUserQuestion`, at most 4 per round: the 4 that unblock the most of the frontier. Recommendation first, labelled `(Recommended)`, trade-off in its description. A `preview` when the answer is a shape. |
+| **About 10 questions** in one numbered message: the frontier, then the next layer down, each dependent one opening `(if Q2 yes)`. Seeing them together is the point: answers shift when the owner sees where each leads. Per question: `**Q1 · <title>**`, the question, `➡️ <recommendation and the trade-off>`, worded so "yes" accepts it. The owner replies `1 yes, 2 no: <their way>, 3 ...`. | `AskUserQuestion`, at most 4 per round: the 4 that unblock the most of the frontier. Recommendation first, labelled `(Recommended)`, trade-off in its description. A `preview` when the answer is a shape. |
 
 **Facts are yours, decisions are the owner's.** A fact the code, the data or
 the web can answer goes to a subagent; only the questions downstream of it

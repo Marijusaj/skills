@@ -1,6 +1,6 @@
 ---
 name: interrogate-list
-description: Interrogate me until you know what to build, asking each round as one numbered list of questions with your recommended answers.
+description: Interrogate me until you know what to build, asking each round as one numbered list of about ten questions, with your recommended answers.
 disable-model-invocation: true
 ---
 

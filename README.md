@@ -7,7 +7,7 @@ landing on one default branch. Each one is the route; the reasoning sits in a
 | Skill | Invoked by | What it does |
 |---|---|---|
 | [interrogate](skills/interrogate/SKILL.md) | the model | Interrogates the owner in rounds of questions that each carry a recommended answer, keeps `docs/decisions/`, the glossary and ADRs current as answers land, runs design-check on the result, then has a fresh agent read the design cold before planning. |
-| [interrogate-list](skills/interrogate-list/SKILL.md) | you, `/interrogate-list` | The same, each round asked as one numbered list you answer in a line (`1 yes, 2 no: ...`). |
+| [interrogate-list](skills/interrogate-list/SKILL.md) | you, `/interrogate-list` | The same, each round asked as one numbered list of about ten questions, the next layer included, that you answer in a line (`1 yes, 2 no: ...`). |
 | [interrogate-cards](skills/interrogate-cards/SKILL.md) | you, `/interrogate-cards` | The same, each round asked as up to four clickable question cards. |
 | [design-check](skills/design-check/SKILL.md) | the model | Checks a design before code is written: deep vs shallow modules, the red flags, facts vs stored conclusions, and a four-line output block the owner reads instead of the code. |
 | [ship](skills/ship/SKILL.md) | you, `/ship` | Takes the current branch all the way out: commit, squash, rebase, gates, walk the UI if it changed, then push and merge under a remote lock so two agents cannot land unverified trees. |
