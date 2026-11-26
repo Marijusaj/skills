@@ -1,13 +1,13 @@
 ---
-name: ship
+name: ship-merge
 description: Take the current branch all the way out. Commit, squash, rebase, run the repo's gates, walk it if it is user-visible, then push and merge under a remote lock so parallel agents cannot collide. Any git repo; reads .claude/ship.json when present.
 argument-hint: "[--lane l|m|h --reason \"why\"] [optional PR title]"
 disable-model-invocation: true
 ---
 
-# /ship
+# /ship-merge
 
-Invoking `/ship` **is** the permission. Stop only for a red gate, a conflict
+Invoking `/ship-merge` **is** the permission. Stop only for a red gate, a conflict
 that needs a judgement about intent, a secret or data-dropping migration in the
 diff, a lock you would have to break, or one of risk-review's two questions
 (a high-risk merge, blocking findings left after the last round).

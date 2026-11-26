@@ -10,8 +10,8 @@ landing on one default branch. Each one is the route; the reasoning sits in a
 | [interrogate-list](skills/interrogate-list/SKILL.md) | you, `/interrogate-list` | The same, each round asked as one numbered list of about ten questions, the next layer included, that you answer in a line (`1 yes, 2 no: ...`). |
 | [interrogate-cards](skills/interrogate-cards/SKILL.md) | you, `/interrogate-cards` | The same, each round asked as up to four clickable question cards. |
 | [design-check](skills/design-check/SKILL.md) | the model | Checks a design before code is written: deep vs shallow modules, the red flags, facts vs stored conclusions, and a four-line output block the owner reads instead of the code. |
-| [risk-review](skills/risk-review/SKILL.md) | the model, and `/ship` | Scores a branch 0-10 with a script (size, risky paths, your `riskPaths`) and the agent's own `Risk: N/10`, then runs the built-in `/code-review` at low, medium or high effort for 1 to 3 rounds, plus `/security-review` when security paths are touched. Fixes what blocks; asks you once only for a high-risk merge. |
-| [ship](skills/ship/SKILL.md) | you, `/ship` | Takes the current branch all the way out: commit, squash, rebase, gates, a review sized by risk, walk the UI if it changed, then push and merge under a remote lock so two agents cannot land unverified trees. |
+| [risk-review](skills/risk-review/SKILL.md) | the model, and `/ship-merge` | Scores a branch 0-10 with a script (size, risky paths, your `riskPaths`) and the agent's own `Risk: N/10`, then runs the built-in `/code-review` at low, medium or high effort for 1 to 3 rounds, plus `/security-review` when security paths are touched. Fixes what blocks; asks you once only for a high-risk merge. |
+| [ship-merge](skills/ship-merge/SKILL.md) | you, `/ship-merge` | Takes the current branch all the way out: commit, squash, rebase, gates, a review sized by risk, walk the UI if it changed, then push and merge under a remote lock so two agents cannot land unverified trees. |
 | [clean](skills/clean/SKILL.md) | you, `/clean` | Retires what this session and its child sessions left behind: dev servers, browsers, merged worktrees and branches. Never touches other sessions. |
 | [clean-all](skills/clean-all/SKILL.md) | you, `/clean-all` | The same sweep across the whole machine and every repo under `$CLEAN_REPOS` (default `~/Code`). |
 
@@ -31,8 +31,11 @@ git clone https://github.com/Marijusaj/skills ~/Code/skills
 for s in ~/Code/skills/skills/*/; do ln -sfn "$s" ~/.claude/skills/$(basename "$s"); done
 ```
 
-Or install as a plugin, which namespaces the skills (`/mj:ship`, `/mj:clean`)
-so they cannot clash with a `ship` you already have:
+Or install as a plugin, which namespaces the skills (`/mj:ship-merge`,
+`/mj:clean`) so they cannot clash with a skill of the same name you already
+have. `ship-merge` was called `ship` until 2026-11-26; it was renamed so it no
+longer shares a name with Claude Code's built-in `/ship`, which opens a pull
+request and never merges.
 
 ```bash
 claude plugin marketplace add Marijusaj/skills
@@ -41,9 +44,9 @@ claude plugin install mj@mj
 
 ## Per-repo configuration
 
-`ship` reads `.claude/ship.json` in the repo when present; every key is
-optional and detected otherwise. See the top of
-[ship/SKILL.md](skills/ship/SKILL.md).
+`ship-merge` reads `.claude/ship.json` in the repo when present (the file
+keeps its name); every key is optional and detected otherwise. See the top of
+[ship-merge/SKILL.md](skills/ship-merge/SKILL.md).
 
 `clean` and `clean-all` run `clean.sh`, a bash 3.2 script for macOS that
 surveys sessions, servers, browsers, worktrees and branches and prints an
