@@ -22,7 +22,7 @@
   "skills": [
     "./skills/design-check",
     "./skills/risk-review",
-    "./skills/ship",
+    "./skills/ship-merge",
     "./skills/clean",
     "./skills/clean-all",
     "./skills/interrogate",

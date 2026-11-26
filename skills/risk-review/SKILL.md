@@ -1,6 +1,6 @@
 ---
 name: risk-review
-description: Score a branch's risk 0-10 and review it with effort to match (low, medium, high lanes), fixing what blocks before it merges. Use when /ship reaches its review step, when the owner says "review this branch" or "how risky is this", and before merging work an agent implemented.
+description: Score a branch's risk 0-10 and review it with effort to match (low, medium, high lanes), fixing what blocks before it merges. Use when /ship-merge reaches its review step, when the owner says "review this branch" or "how risky is this", and before merging work an agent implemented.
 ---
 
 # Risk review
@@ -15,7 +15,7 @@ risk.sh on the diff ┼─▶ max() ─▶ 0-10 ─▶ L / M / H ─▶ review r
 --lane override ────┘                                (fix, re-gate, re-review)
 ```
 
-Inputs: the base ref (`origin/<default>`), and from `/ship` the gate command
+Inputs: the base ref (`origin/<default>`), and from `/ship-merge` the gate command
 and any `--lane`/`--reason`. On its own, take the gate from `.claude/ship.json`
 `gates`; without one, say in the log line that no gate was re-run.
 

@@ -1,4 +1,4 @@
-# /ship: the traps, and why the steps are the shape they are
+# /ship-merge: the traps, and why the steps are the shape they are
 
 Read this **when something bites**, not before; the one exception is § *The
 lock, step by step*, which every merge needs. `SKILL.md` is the route; this is
@@ -149,7 +149,7 @@ throws their work away silently.
 
 ## When another agent merged an overlapping change
 
-A judgement call, and one of the few things `/ship` may stop for.
+A judgement call, and one of the few things `/ship-merge` may stop for.
 
 - **Resolve toward *their* merged version**, then re-apply your intent on top.
   Theirs is already gated and possibly deployed.
